@@ -8,35 +8,64 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Agricultural Color System */
+    --background: 47 31% 97%;
+    --foreground: 120 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 120 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 120 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Forest Green */
+    --primary: 140 45% 25%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 140 35% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Earth */
+    --secondary: 25 35% 85%;
+    --secondary-foreground: 120 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Sage Green */
+    --muted: 120 15% 90%;
+    --muted-foreground: 120 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Golden Harvest */
+    --accent: 45 85% 65%;
+    --accent-foreground: 120 25% 15%;
+
+    /* Success - Fresh Green */
+    --success: 120 50% 45%;
+    --success-foreground: 0 0% 98%;
+
+    /* Warning - Warm Gold */
+    --warning: 42 90% 55%;
+    --warning-foreground: 120 25% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 120 15% 85%;
+    --input: 120 15% 88%;
+    --ring: 140 45% 25%;
 
     --radius: 0.5rem;
+
+    /* Agricultural Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(140 45% 25%), hsl(45 85% 65%));
+    --gradient-earth: linear-gradient(180deg, hsl(25 35% 85%), hsl(25 25% 75%));
+    --gradient-field: linear-gradient(45deg, hsl(120 50% 45%), hsl(140 45% 25%));
+
+    /* Agricultural Shadows */
+    --shadow-natural: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+    --shadow-card: 0 4px 20px -4px hsl(120 25% 15% / 0.1);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -102,4 +131,77 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Bootstrap CSS Import */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+
+/* Agricultural Component Styles */
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-natural {
+    background: hsl(var(--card));
+    box-shadow: var(--shadow-card);
+    border-radius: calc(var(--radius) * 2);
+    transition: var(--transition-smooth);
+  }
+  
+  .card-natural:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-natural);
+  }
+  
+  .btn-agriculture {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: var(--transition-bounce);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .btn-agriculture:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    filter: brightness(1.1);
+  }
+  
+  .navbar-agro {
+    background: linear-gradient(90deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+  }
+  
+  .field-animation {
+    animation: gentle-sway 3s ease-in-out infinite;
+  }
+  
+  @keyframes gentle-sway {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    50% { transform: translateX(2px) rotate(0.5deg); }
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
 }
